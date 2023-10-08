@@ -2,7 +2,6 @@
 
 #include "interfaces/console.h"
 #include "interfaces/cvar.h"
-#include "interfaces/engine_api.h"
 #include "interfaces/engine_client.h"
 #include "interfaces/surface.h"
 #include "utils.h"
@@ -22,29 +21,24 @@ ret *get_interface(const std::string &module_name, const std::string &interface_
 		if (!result)
 			return nullptr;
 
+		utils::console::log("found interface %s in %s at %p.\n", interface_name.c_str(), module_name.c_str(), result);
+
 		return static_cast<ret *>(result);
 	}
 
 	return nullptr;
 }
 
-template <typename ret>
-ret *copy_interface(const std::string &module_name, const std::string &interface_name) {
-	auto orig_interface = get_interface<void *>(module_name, interface_name);
-	auto c = new ret(orig_interface);
-	return c;
-}
-
 class c_portal2 {
 public:
 	c_console *console;
-	c_cvar *cvar;
+	i_cvar *cvar;
 	void *server_game_dll;
-	c_engine_api *engine_api;
+	void *engine_api;
 	void *engine;
-	c_engine_client *engine_client;
+	i_engine_client *engine_client;
 	void *client_state;
 	void *server_plugin_helpers;
-	c_surface *surface;
+	i_surface *surface;
 	void *i_engine_vgui_internal;
 };

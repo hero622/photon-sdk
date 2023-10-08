@@ -83,32 +83,32 @@ namespace sdk {
 	class con_var : con_command_base {
 	public:
 		void *con_var_v_table;
-		con_var *m_p_parent;
-		const char *m_psz_default_value;
-		char *m_psz_string;
-		int m_string_length;
-		float m_f_value;
-		int m_n_value;
-		bool m_b_has_min;
-		float m_f_min_val;
-		bool m_b_has_max;
-		float m_f_max_val;
-		utl_vector<fn_change_callback_t> m_fn_change_callback;
+		con_var *parent;
+		const char *default_value;
+		char *string;
+		int string_length;
+		float f_value;
+		int n_value;
+		bool has_min;
+		float min_val;
+		bool has_max;
+		float max_val;
+		utl_vector<fn_change_callback_t> fn_change_callback;
 
-		con_var(const char *name, const char *p_default_value, int flags, const char *help_string, bool b_min, float f_min, bool b_max, float f_max)
+		con_var(const char *name, const char *default_value, int flags, const char *help_string, bool b_min, float f_min, bool b_max, float f_max)
 			: con_command_base(name, help_string, flags)
 			, con_var_v_table(nullptr)
-			, m_p_parent(nullptr)
-			, m_psz_default_value(p_default_value)
-			, m_psz_string(nullptr)
-			, m_string_length(0)
-			, m_f_value(0.0f)
-			, m_n_value(0)
-			, m_b_has_min(b_min)
-			, m_f_min_val(f_min)
-			, m_b_has_max(b_max)
-			, m_f_max_val(f_max)
-			, m_fn_change_callback() {
+			, parent(nullptr)
+			, default_value(default_value)
+			, string(nullptr)
+			, string_length(0)
+			, f_value(0.0f)
+			, n_value(0)
+			, has_min(b_min)
+			, min_val(f_min)
+			, has_max(b_max)
+			, max_val(f_max)
+			, fn_change_callback() {
 		}
 	};
 }  // namespace sdk

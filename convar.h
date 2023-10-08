@@ -15,7 +15,7 @@ public:
 
 	c_command();
 	c_command(const char *name);
-	c_command(const char *p_name, sdk::fn_command_callback_t callback, const char *p_help_string, int flags = 0, sdk::fn_command_completion_callback completion_func = 0);
+	c_command(const char *name, sdk::fn_command_callback_t callback, const char *help_string, int flags = 0, sdk::fn_command_completion_callback completion_func = 0);
 	~c_command();
 
 	void reg();

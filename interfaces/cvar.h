@@ -1,17 +1,17 @@
 #pragma once
 
+#include "../portal2.h"
 #include "../source_sdk.h"
 
-class c_cvar {
+class i_cvar {
 public:
-	void *ptr;
-
-	virtual void register_con_command(sdk::con_command_base *p_command_base);
-	virtual void unregister_con_command(sdk::con_command_base *p_command_base);
-	virtual sdk::con_command_base *find_command_base(const char *name);
-
-public:
-	void *con_command_vtable;
-
-	c_cvar(void *ptr);
+	void register_con_command(sdk::con_command_base *p_command_base) {
+		return utils::memory::call_virtual<void>(offsets::register_con_command, this, p_command_base);
+	}
+	void unregister_con_command(sdk::con_command_base *p_command_base) {
+		return utils::memory::call_virtual<void>(offsets::unregister_con_command, this, p_command_base);
+	}
+	sdk::con_command_base *find_command_base(const char *name) {
+		return utils::memory::call_virtual<sdk::con_command_base *>(offsets::find_command_base, this, name);
+	}
 };

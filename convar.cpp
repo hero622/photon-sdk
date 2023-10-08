@@ -16,10 +16,10 @@ c_command::c_command(const char *name) {
 	this->is_reference = true;
 }
 
-c_command::c_command(const char *p_name, sdk::fn_command_callback_t callback, const char *p_help_string, int flags, sdk::fn_command_completion_callback completion_func)
+c_command::c_command(const char *name, sdk::fn_command_callback_t callback, const char *help_string, int flags, sdk::fn_command_completion_callback completion_func)
 	: is_registered(false)
 	, is_reference(false) {
-	this->ptr = new sdk::con_command(p_name, callback, p_help_string, flags, completion_func);
+	this->ptr = new sdk::con_command(name, callback, help_string, flags, completion_func);
 
 	c_command::get_list().push_back(this);
 }
@@ -31,7 +31,7 @@ c_command::~c_command() {
 
 void c_command::reg() {
 	if (!this->is_registered) {
-		*(void **)this->ptr = shared->portal2->cvar->con_command_vtable;
+		*(void **)this->ptr = *(void **)shared->portal2->cvar->find_command_base("listdemo");
 		shared->portal2->cvar->register_con_command(this->ptr);
 	}
 	this->is_registered = true;

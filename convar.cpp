@@ -11,7 +11,7 @@ c_command::c_command() {
 }
 
 c_command::c_command(const char *name) {
-	this->ptr = reinterpret_cast<sdk::con_command *>(shared->portal2->cvar->find_command_base(name));
+	this->ptr = reinterpret_cast<sdk::con_command *>(wh->portal2->cvar->find_command_base(name));
 	this->is_registered = false;
 	this->is_reference = true;
 }
@@ -31,15 +31,15 @@ c_command::~c_command() {
 
 void c_command::reg() {
 	if (!this->is_registered) {
-		*(void **)this->ptr = *(void **)shared->portal2->cvar->find_command_base("listdemo");
-		shared->portal2->cvar->register_con_command(this->ptr);
+		*(void **)this->ptr = *(void **)wh->portal2->cvar->find_command_base("listdemo");
+		wh->portal2->cvar->register_con_command(this->ptr);
 	}
 	this->is_registered = true;
 }
 
 void c_command::unreg() {
 	if (this->is_registered)
-		shared->portal2->cvar->unregister_con_command(this->ptr);
+		wh->portal2->cvar->unregister_con_command(this->ptr);
 	this->is_registered = false;
 }
 

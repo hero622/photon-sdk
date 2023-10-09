@@ -2,5 +2,5 @@
 
 class c_events {
 public:
-	virtual void post(const char *msg);
+	virtual void post(void *sender, const char *msg);
 };

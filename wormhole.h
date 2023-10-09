@@ -17,6 +17,8 @@ namespace wh_api {
 
 	class i_wormhole_mod {
 	public:
+		const char *name;
+
 		virtual bool load(c_shared *wh) = 0;
 		virtual void unload() = 0;
 		virtual void on_event(const char *msg) = 0;
@@ -25,7 +27,7 @@ namespace wh_api {
 
 extern wh_api::c_shared *wh;
 
-#define expose_wormhole_mod(class_name)            \
-	dll_export wh_api::i_wormhole_mod *create_mod() { \
-		return new class_name();                         \
+#define expose_wormhole_mod(class_t, name) \
+	dll_export class_t *create_mod() {        \
+		return static_cast<class_t *>(&name);    \
 	}

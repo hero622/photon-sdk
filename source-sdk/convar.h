@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../portal2.h"
+#include "../utils.h"
 #include "utlvector.h"
 
 namespace sdk {
@@ -23,8 +25,7 @@ namespace sdk {
 	typedef void (*fn_command_callback_t)(const c_command &command);
 	typedef int (*fn_command_completion_callback)(const char *partial, char commands[64][64]);
 
-	class con_command_base {
-	public:
+	struct con_command_base {
 		con_command_base(const char *name, const char *help_string = 0, int flags = 0)
 			: next(nullptr)
 			, registered(false)
@@ -36,6 +37,7 @@ namespace sdk {
 #ifndef _WIN32
 		virtual void _dtor1(){};
 #endif
+		virtual bool is_enabled() const { return false; };
 
 		con_command_base *next;
 		bool registered;
@@ -44,8 +46,7 @@ namespace sdk {
 		int flags;
 	};
 
-	class con_command : public con_command_base {
-	public:
+	struct con_command : con_command_base {
 		con_command(const char *name, fn_command_callback_t callback, const char *help_string = 0, int flags = 0, fn_command_completion_callback completion_func = 0)
 			: con_command_base(name, help_string, flags)
 			, fn_command_callback(callback)
@@ -80,24 +81,10 @@ namespace sdk {
 
 	typedef void (*fn_change_callback_t)(i_con_var *var, const char *p_old_value, float fl_old_value);
 
-	class con_var : con_command_base {
-	public:
-		void *con_var_v_table;
-		con_var *parent;
-		const char *default_value;
-		char *string;
-		int string_length;
-		float f_value;
-		int n_value;
-		bool has_min;
-		float min_val;
-		bool has_max;
-		float max_val;
-		utl_vector<fn_change_callback_t> fn_change_callback;
-
+	struct con_var : con_command_base {
 		con_var(const char *name, const char *default_value, int flags, const char *help_string, bool b_min, float f_min, bool b_max, float f_max)
 			: con_command_base(name, help_string, flags)
-			, con_var_v_table(nullptr)
+			, vtable(nullptr)
 			, parent(nullptr)
 			, default_value(default_value)
 			, string(nullptr)
@@ -110,5 +97,18 @@ namespace sdk {
 			, max_val(f_max)
 			, fn_change_callback() {
 		}
+
+		void *vtable;
+		con_var *parent;
+		const char *default_value;
+		char *string;
+		int string_length;
+		float f_value;
+		int n_value;
+		bool has_min;
+		float min_val;
+		bool has_max;
+		float max_val;
+		utl_vector<fn_change_callback_t> fn_change_callback;
 	};
 }  // namespace sdk

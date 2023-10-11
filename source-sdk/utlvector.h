@@ -1,8 +1,54 @@
 #pragma once
 
 #include <assert.h>
+#include <string.h>
 
 namespace sdk {
+	template <class t>
+	inline t *construct(t *memory) {
+		return ::new (memory) t;
+	}
+
+	template <class t, typename arg1>
+	inline t *construct(t *memory, arg1 a1) {
+		return ::new (memory) t(a1);
+	}
+
+	template <class t, typename arg1, typename arg2>
+	inline t *construct(t *memory, arg1 a1, arg2 a2) {
+		return ::new (memory) t(a1, a2);
+	}
+
+	template <class t, typename arg1, typename arg2, typename arg3>
+	inline t *construct(t *memory, arg1 a1, arg2 a2, arg3 a3) {
+		return ::new (memory) t(a1, a2, a3);
+	}
+
+	template <class t, typename arg1, typename arg2, typename arg3, typename arg4>
+	inline t *construct(t *memory, arg1 a1, arg2 a2, arg3 a3, arg4 a4) {
+		return ::new (memory) t(a1, a2, a3, a4);
+	}
+
+	template <class t, typename arg1, typename arg2, typename arg3, typename arg4, typename arg5>
+	inline t *construct(t *memory, arg1 a1, arg2 a2, arg3 a3, arg4 a4, arg5 a5) {
+		return ::new (memory) t(a1, a2, a3, a4, a5);
+	}
+
+	template <class t>
+	inline t *copy_construct(t *memory, t const &src) {
+		return ::new (memory) t(src);
+	}
+
+	template <class t>
+	inline t *move_construct(t *memory, t &&src) {
+		return ::new (memory) t(move(src));
+	}
+
+	template <class t>
+	inline void destruct(t *memory) {
+		memory->~t();
+	}
+
 	template <class t, class a = int>
 	class utl_memory {
 	public:
@@ -21,25 +67,25 @@ namespace sdk {
 			return allocation_count;
 		}
 
-		inline int utl_memory_calc_new_allocation_count(int n_allocation_count, int n_grow_size, int n_new_size, int n_bytes_item) {
-			if (n_grow_size) {
-				n_allocation_count = ((1 + ((n_new_size - 1) / n_grow_size)) * n_grow_size);
+		inline int utl_memory_calc_new_allocation_count(int allocation_count, int grow_size, int new_size, int bytes_item) {
+			if (grow_size) {
+				allocation_count = ((1 + ((new_size - 1) / grow_size)) * grow_size);
 			} else {
-				if (!n_allocation_count) {
+				if (!allocation_count) {
 					// compute an allocation which is at least as big as a cache line...
-					n_allocation_count = (31 + n_bytes_item) / n_bytes_item;
+					allocation_count = (31 + bytes_item) / bytes_item;
 				}
 
-				while (n_allocation_count < n_new_size) {
-					int n_new_allocation_count = (n_allocation_count * 9) / 8;  // 12.5 %
-					if (n_new_allocation_count > n_allocation_count)
-						n_allocation_count = n_new_allocation_count;
+				while (allocation_count < new_size) {
+					int new_allocation_count = (allocation_count * 9) / 8;  // 12.5 %
+					if (new_allocation_count > allocation_count)
+						allocation_count = new_allocation_count;
 					else
-						n_allocation_count *= 2;
+						allocation_count *= 2;
 				}
 			}
 
-			return n_allocation_count;
+			return allocation_count;
 		}
 
 		void grow(int num) {

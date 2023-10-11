@@ -29,13 +29,42 @@ public:
 };
 
 class c_variable {
-	// public:
-	// 	sdk::con_var *ptr;
+public:
+	sdk::con_var *ptr;
 
-	// 	bool is_registered;
-	// 	bool is_reference;
+	int orig_flags;
+	sdk::utl_vector<sdk::fn_change_callback_t> orig_cbks;
 
-	// 	static std::vector<c_command *> &get_list();
+	union {
+		sdk::fn_change_callback_t orig_fn_change_cbk;
+		int orig_size;
+	};
+
+	bool is_registered;
+	bool is_reference;
+	bool has_custom_cbk;
+	bool is_unlocked;
+
+	static std::vector<c_variable *> &get_list();
+
+	c_variable();
+	c_variable(const char *name);
+	c_variable(const char *name, const char *value, const char *help_string, int flags = fcvar_never_as_string, sdk::fn_change_callback_t callback = nullptr);
+	c_variable(const char *name, const char *value, float min, const char *help_string, int flags = fcvar_never_as_string, sdk::fn_change_callback_t callback = nullptr);
+	c_variable(const char *name, const char *value, float min, float max, const char *help_string, int flags = fcvar_never_as_string, sdk::fn_change_callback_t callback = nullptr);
+	~c_variable();
+
+	void create(const char *name, const char *value, int flags = 0, const char *help_string = "", bool has_min = false, float min = 0, bool has_max = false, float max = 0, sdk::fn_change_callback_t callback = nullptr);
+	void realloc();
+	void add_cbk(sdk::fn_change_callback_t cbk);
+
+	void reg();
+	void unreg();
+
+	static void clear_all_cbks();
+	static void regall();
+	static void unregall();
+	static c_variable *find(const char *name);
 };
 
 #define create_con_command(name, description)                     \

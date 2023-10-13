@@ -26,9 +26,9 @@ namespace offsets {
 	offset(draw_filled_rect, 15, 15);
 	offset(draw_outlined_rect, 16, 16);
 	offset(draw_line, 18, 18);
-	offset(draw_set_text_font, 22, 22);
-	offset(draw_set_text_color, 23, 24);
-	offset(get_font_tall, 72, 72);
+	offset(draw_colored_text, 160, 160);
+	offset(create_font, 69, 69);
+	offset(set_font_glyph_set, 70, 70);
 	offset(get_text_size, 77, 77);
 	offset(draw_set_texture_file, 35, 35);
 	offset(draw_set_texture_rgba, 36, 36);

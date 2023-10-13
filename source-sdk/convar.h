@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../portal2.h"
-#include "../utils.h"
 #include "utlvector.h"
 
 namespace sdk {

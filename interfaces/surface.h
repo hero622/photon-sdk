@@ -17,12 +17,6 @@ public:
 	void draw_line(int x0, int y0, int x1, int y1) {
 		return utils::memory::call_virtual<void>(offsets::draw_line, this, x0, y0, x1, y1);
 	}
-	void draw_set_text_font(sdk::h_font font) {
-		return utils::memory::call_virtual<void>(offsets::draw_set_text_font, this, font);
-	}
-	void draw_set_text_color(sdk::color_t col) {
-		return utils::memory::call_virtual<void>(offsets::draw_set_text_color, this, col);
-	}
 	void draw_set_texture_file(int id, const char *filename, int hardware_filter, bool force_reload) {
 		return utils::memory::call_virtual<void>(offsets::draw_set_texture_file, this, id, filename, hardware_filter, force_reload);
 	}
@@ -44,11 +38,18 @@ public:
 	int create_new_texture_id(bool procedural) {
 		return utils::memory::call_virtual<int>(offsets::create_new_texture_id, this, procedural);
 	}
-	int get_font_tall(sdk::h_font font) {
-		return utils::memory::call_virtual<int>(offsets::get_font_tall, this, font);
+	sdk::h_font create_font() {
+		return utils::memory::call_virtual<sdk::h_font>(offsets::create_font, this);
+	}
+	bool set_font_glyph_set(sdk::h_font font, const char *font_name, int tall, int weight, int blur, int scanlines, int flags, int range_min = 0, int range_max = 0) {
+		return utils::memory::call_virtual<bool>(offsets::set_font_glyph_set, this, font, font_name, tall, weight, blur, scanlines, flags, range_min, range_max);
 	}
 	int get_text_size(sdk::h_font font, const wchar_t *text, int &wide, int &tall) {
 		return utils::memory::call_virtual<int>(offsets::get_text_size, this, font, text, wide, tall);
+	}
+	template <typename... args_t>
+	void draw_colored_text(sdk::h_font font, int x, int y, int r, int g, int b, int a, const char *fmt, args_t... args) {
+		return utils::memory::call_virtual<void>(offsets::draw_colored_text, this, font, x, y, r, g, b, a, fmt, args...);
 	}
 	void start_drawing() {
 		auto paint_traverse_ex = utils::memory::get_virtual(this, offsets::paint_traverse_ex);

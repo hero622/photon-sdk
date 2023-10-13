@@ -1,6 +1,16 @@
 #pragma once
 
 namespace sdk {
+	class vec2_t {
+	public:
+		float x, y;
+
+		vec2_t(float x, float y) {
+			this->x = x;
+			this->y = y;
+		}
+	};
+
 	class vec3_t {
 	public:
 		float x, y, z;

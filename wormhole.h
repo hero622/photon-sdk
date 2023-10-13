@@ -3,6 +3,7 @@
 #include "convar.h"
 #include "events.h"
 #include "hook.h"
+#include "hud.h"
 #include "interfaces.h"
 #include "source_sdk.h"
 #include "utils.h"
@@ -13,6 +14,7 @@ namespace wh_api {
 		c_portal2 *portal2;
 		c_hook *hook;
 		c_events *events;
+		c_huds *huds;
 	};
 
 	class i_wormhole_mod {

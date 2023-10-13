@@ -48,7 +48,9 @@ public:
 		return utils::memory::call_virtual<void>(offsets::get_text_size, this, font, text, wide, tall);
 	}
 	void draw_colored_text(sdk::h_font font, int x, int y, int r, int g, int b, int a, const char *text) {
-		return utils::memory::call_virtual<void>(offsets::draw_colored_text, this, font, x, y, r, g, b, a, text);
+		// !!! this is __cdecl because it has varargs
+		using fn_t = void(__cdecl *)(void *, sdk::h_font, int, int, int, int, int, int, const char *);
+		return (*reinterpret_cast<fn_t **>(this))[offsets::draw_colored_text](this, font, x, y, r, g, b, a, text);
 	}
 	void start_drawing() {
 		auto paint_traverse_ex = utils::memory::get_virtual(this, offsets::paint_traverse_ex);

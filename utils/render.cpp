@@ -19,9 +19,9 @@ void utils::render::draw_line(int x0, int y0, int x1, int y1, sdk::color_t color
 	wh->portal2->surface->draw_line(x0, y0, x1, y1);
 }
 
-void utils::render::create_font(sdk::h_font &font, const char *font_name, int size, bool bold, int flags) {
+bool utils::render::create_font(sdk::h_font &font, const char *font_name, int size, bool bold, int flags) {
 	font = wh->portal2->surface->create_font();
-	wh->portal2->surface->set_font_glyph_set(font, font_name, size, bold ? 800 : 0, 0, 0, flags);
+	return wh->portal2->surface->set_font_glyph_set(font, font_name, size, bold ? 800 : 0, 0, 0, flags);
 }
 
 void utils::render::text(int x, int y, sdk::h_font font, sdk::color_t color, bool center, const char *text) {

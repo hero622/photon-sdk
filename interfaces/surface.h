@@ -44,12 +44,11 @@ public:
 	bool set_font_glyph_set(sdk::h_font font, const char *font_name, int tall, int weight, int blur, int scanlines, int flags, int range_min = 0, int range_max = 0) {
 		return utils::memory::call_virtual<bool>(offsets::set_font_glyph_set, this, font, font_name, tall, weight, blur, scanlines, flags, range_min, range_max);
 	}
-	int get_text_size(sdk::h_font font, const wchar_t *text, int &wide, int &tall) {
-		return utils::memory::call_virtual<int>(offsets::get_text_size, this, font, text, wide, tall);
+	void get_text_size(sdk::h_font font, const wchar_t *text, int &wide, int &tall) {
+		return utils::memory::call_virtual<void>(offsets::get_text_size, this, font, text, wide, tall);
 	}
-	template <typename... args_t>
-	void draw_colored_text(sdk::h_font font, int x, int y, int r, int g, int b, int a, const char *fmt, args_t... args) {
-		return utils::memory::call_virtual<void>(offsets::draw_colored_text, this, font, x, y, r, g, b, a, fmt, args...);
+	void draw_colored_text(sdk::h_font font, int x, int y, int r, int g, int b, int a, const char *text) {
+		return utils::memory::call_virtual<void>(offsets::draw_colored_text, this, font, x, y, r, g, b, a, text);
 	}
 	void start_drawing() {
 		auto paint_traverse_ex = utils::memory::get_virtual(this, offsets::paint_traverse_ex);

@@ -205,7 +205,7 @@ void c_variable::unregall() {
 
 c_variable *c_variable::find(const char *name) {
 	for (const auto &var : c_variable::get_list()) {
-		if (!std::strcmp(var->ptr->name, name)) {
+		if (!strcmp(var->ptr->name, name)) {
 			return var;
 		}
 	}

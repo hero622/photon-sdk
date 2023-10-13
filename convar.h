@@ -67,9 +67,9 @@ public:
 	static c_variable *find(const char *name);
 };
 
-#define create_con_command(name, description)                     \
-	static void name##_cbk(const sdk::c_command &args);              \
-	static c_command name##_command(#name, name##_cbk, description); \
+#define create_con_command(name, description)                 \
+	static void name##_cbk(const sdk::c_command &args);          \
+	static c_command name##_cmd(#name, name##_cbk, description); \
 	static void name##_cbk(const sdk::c_command &args)
 
 #define decl_hk_cmd(name)                       \

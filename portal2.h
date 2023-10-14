@@ -30,6 +30,7 @@ namespace offsets {
 	offset(create_font, 69, 69);
 	offset(set_font_glyph_set, 70, 70);
 	offset(get_text_size, 77, 77);
+	offset(draw_get_texture_id, 33, 33);
 	offset(draw_set_texture_file, 35, 35);
 	offset(draw_set_texture_rgba, 36, 36);
 	offset(draw_set_texture, 37, 37);
@@ -37,6 +38,7 @@ namespace offsets {
 	offset(draw_textured_rect, 39, 39);
 	offset(is_texture_id_valid, 40, 40);
 	offset(create_new_texture_id, 41, 41);
+	offset(get_screen_size, 42, 42);
 	offset(paint, 14, 15);
 	offset(paint_traverse_ex, 117, 117);
 	offset(start_drawing, 127, 1341);

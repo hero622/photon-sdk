@@ -2,19 +2,19 @@
 
 #include "../wormhole.h"
 
-void utils::render::draw_filled_rect(int x0, int y0, int x1, int y1, sdk::color_t color) {
+void utils::render::draw_filled_rect(int x, int y, int w, int h, sdk::color_t color) {
 	wh->portal2->surface->draw_set_color(color.r, color.g, color.b, color.a);
-	wh->portal2->surface->draw_filled_rect(x0, y0, x1, y1);
+	wh->portal2->surface->draw_filled_rect(x, y, x + w, y + h);
 }
 
-void utils::render::draw_outlined_rect(int x0, int y0, int x1, int y1, sdk::color_t color) {
+void utils::render::draw_outlined_rect(int x, int y, int w, int h, sdk::color_t color) {
 	wh->portal2->surface->draw_set_color(color.r, color.g, color.b, color.a);
-	wh->portal2->surface->draw_outlined_rect(x0, y0, x1, y1);
+	wh->portal2->surface->draw_outlined_rect(x, y, x + w, y + h);
 }
 
-void utils::render::draw_line(int x0, int y0, int x1, int y1, sdk::color_t color) {
+void utils::render::draw_line(int x, int y, int w, int h, sdk::color_t color) {
 	wh->portal2->surface->draw_set_color(color.r, color.g, color.b, color.a);
-	wh->portal2->surface->draw_line(x0, y0, x1, y1);
+	wh->portal2->surface->draw_line(x, y, x + w, y + h);
 }
 
 bool utils::render::create_font(sdk::h_font &font, const char *font_name, int size, bool bold, int flags) {
@@ -41,4 +41,23 @@ sdk::vec2_t utils::render::get_text_size(sdk::h_font font, std::string text) {
 	wh->portal2->surface->get_text_size(font, std::wstring(text.begin(), text.end()).c_str(), text_width, text_height);
 
 	return sdk::vec2_t(text_width, text_height);
+}
+
+void utils::render::draw_texture(int x, int y, int w, int h, std::string texture, sdk::color_t color) {
+	int id = wh->portal2->surface->draw_get_texture_id(texture.c_str());
+	if (!id) {
+		id = wh->portal2->surface->create_new_texture_id(true);
+		wh->portal2->surface->draw_set_texture_file(id, texture.c_str(), false, true);
+	}
+	wh->portal2->surface->draw_set_texture(id);
+	wh->portal2->surface->draw_set_color(color.r, color.g, color.b, color.a);
+	wh->portal2->surface->draw_textured_rect(x, y, x + w, y + h);
+}
+
+sdk::vec2_t utils::render::get_screen_size() {
+	int w, h;
+
+	wh->portal2->surface->get_screen_size(w, h);
+
+	return sdk::vec2_t(w, h);
 }

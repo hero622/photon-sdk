@@ -22,11 +22,14 @@ namespace wh_api {
 
 class c_huds {
 private:
-	static std::vector<wh_api::c_hud *> &get_list();
+	static std::vector<wh_api::c_hud *> &get_huds();
+	static std::vector<wh_api::c_thud *> &get_thuds();
 
 public:
 	virtual void reg(wh_api::c_hud *hud);
+	virtual void reg(wh_api::c_thud *hud);
 	virtual void unreg(wh_api::c_hud *hud);
+	virtual void unreg(wh_api::c_thud *hud);
 
-	void paint_all();
+	void paint_huds();
 };

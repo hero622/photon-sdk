@@ -43,6 +43,9 @@ namespace offsets {
 	offset(paint_traverse_ex, 117, 117);
 	offset(start_drawing, 127, 1341);
 	offset(finish_drawing, 603, 355);
+	offset(enable_input, 10, 10);
+	offset(is_button_down, 14, 14);
+	offset(get_cursor_position, 45, 45);
 }  // namespace offsets
 
 namespace signatures {

@@ -4,7 +4,9 @@
 #include "events.h"
 #include "hook.h"
 #include "hud.h"
+#include "input.h"
 #include "interfaces.h"
+#include "render.h"
 #include "source_sdk.h"
 #include "utils.h"
 
@@ -15,6 +17,8 @@ namespace wh_api {
 		c_hook *hook;
 		c_events *events;
 		c_huds *huds;
+		c_render *render;
+		c_input *input;
 	};
 
 	class i_wormhole_mod {

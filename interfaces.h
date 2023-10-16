@@ -3,6 +3,7 @@
 #include "interfaces/console.h"
 #include "interfaces/cvar.h"
 #include "interfaces/engine_client.h"
+#include "interfaces/input_system.h"
 #include "interfaces/mem_alloc.h"
 #include "interfaces/surface.h"
 #include "utils.h"
@@ -43,4 +44,5 @@ public:
 	i_surface *surface;
 	void *engine_vgui_internal;
 	i_mem_alloc *mem_alloc;
+	i_input_system *input_system;
 };

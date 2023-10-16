@@ -5,7 +5,6 @@ namespace utils {}
 #include "utils/console.h"
 #include "utils/memory.h"
 #include "utils/platform.h"
-#include "utils/render.h"
 #include "utils/string.h"
 
 #define delete_ptr(ptr) \

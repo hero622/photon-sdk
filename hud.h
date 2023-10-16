@@ -5,21 +5,25 @@
 #include <vector>
 
 namespace wh_api {
-	struct hud_element_t {
-		const char *name;
+	class c_hud {
+	public:
 		sdk::vec2_t anchor;
 		sdk::vec2_t pos;
 		float size;
-	};
 
-	class c_hud : public hud_element_t {
-	public:
+		const char *name;  // set this
+
 		virtual void paint() = 0;
 	};
 
-	class c_thud : public hud_element_t {
+	class c_thud {
 	public:
+		sdk::vec2_t anchor;
+		sdk::vec2_t pos;
+		float size;
 		sdk::h_font font;
+
+		const char *name;  // set this
 
 		virtual const char *get_text() = 0;
 	};

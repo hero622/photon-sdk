@@ -23,11 +23,10 @@ namespace wh_api {
 
 	class i_wormhole_mod {
 	public:
-		const char *name;
-
 		virtual bool load(c_shared *wh) = 0;
 		virtual void unload() = 0;
 		virtual void on_event(const char *msg) = 0;
+		virtual const char *get_name() = 0;
 	};
 }  // namespace wh_api
 

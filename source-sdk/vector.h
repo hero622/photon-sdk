@@ -1,9 +1,10 @@
 #pragma once
 
 namespace sdk {
-	class vec2_t {
-	public:
+	struct vec2_t {
 		float x, y;
+
+		vec2_t() {}
 
 		vec2_t(float x, float y) {
 			this->x = x;
@@ -11,9 +12,10 @@ namespace sdk {
 		}
 	};
 
-	class vec3_t {
-	public:
+	struct vec3_t {
 		float x, y, z;
+
+		vec3_t() {}
 
 		vec3_t(float x, float y, float z) {
 			this->x = x;

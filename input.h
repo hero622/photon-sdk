@@ -11,4 +11,5 @@ public:
 	virtual bool get_key_press(unsigned int code);
 
 	virtual sdk::vec2_t get_cursor_position();
+	virtual bool is_cursor_in_area(int x0, int y0, int x1, int y1);
 };

@@ -5,17 +5,22 @@
 #include <vector>
 
 namespace wh_api {
-	class c_hud {
-	public:
+	struct hud_element_t {
+		const char *name;
 		sdk::vec2_t anchor;
 		sdk::vec2_t pos;
 		float size;
+	};
 
+	class c_hud : public hud_element_t {
+	public:
 		virtual void paint() = 0;
 	};
 
-	class c_thud {
+	class c_thud : public hud_element_t {
 	public:
+		sdk::h_font font;
+
 		virtual const char *get_text() = 0;
 	};
 }  // namespace wh_api
@@ -31,5 +36,5 @@ public:
 	virtual void unreg(wh_api::c_hud *hud);
 	virtual void unreg(wh_api::c_thud *hud);
 
-	void paint_huds();
+	void paint();  // this should not be called by mods
 };

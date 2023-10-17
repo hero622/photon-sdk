@@ -2,8 +2,6 @@
 
 #include "source_sdk.h"
 
-#include <unordered_map>
-
 namespace wh_api {
 	class i_hud {
 	public:
@@ -32,15 +30,9 @@ struct thud_instance_t {
 };
 
 class c_huds {
-private:
-	virtual std::unordered_map<wh_api::i_hud *, hud_instance_t> &get_huds();
-	virtual std::unordered_map<wh_api::i_thud *, thud_instance_t> &get_thuds();
-
 public:
 	virtual void reg(wh_api::i_hud *hud);
-	virtual void reg(wh_api::i_thud *hud);
+	virtual void reg(wh_api::i_thud *thud);
 	virtual void unreg(wh_api::i_hud *hud);
-	virtual void unreg(wh_api::i_thud *hud);
-
-	void paint();  // this should not be called by mods
+	virtual void unreg(wh_api::i_thud *thud);
 };

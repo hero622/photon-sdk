@@ -19,8 +19,6 @@
 #	define hk_fn(t, name, ...) \
 		t __fastcall name##_hk_fn(void *ecx, int edx, __VA_ARGS__)
 
-#	define sleep(ms) Sleep(ms)
-
 #	define plat_module(name, win, linux) inline const char *name = win
 #	define offset(name, win, linux) inline int name = win
 #	define signature(name, win, linux) inline const char *name = win
@@ -43,8 +41,6 @@
 
 #	define hk_fn(t, name, ...) \
 		t __rescall name##_hk_fn(void *ecx, ##__VA_ARGS__)
-
-#	define sleep(ms) usleep((ms)*1000)
 
 #	define plat_module(name, win, linux) inline const char *name = linux
 #	define offset(name, win, linux) inline int name = linux

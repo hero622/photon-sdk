@@ -4,34 +4,23 @@
 
 #include <string>
 
-struct bounds_t {
-	int top;
-	int left;
-	int bottom;
-	int right;
-};
-
 namespace wh_api {
 	class hud_t {
 	public:
 		sdk::vec2_t pos;
 		sdk::vec2_t anchor;
 		float scale;
-		bounds_t bounds;
+		sdk::vec2_t bounds;
 
 	protected:
-		__forceinline void update_bounds(int x, int y, int w, int h) {
-			if (bounds.top < y) bounds.top = y;
-			if (bounds.left < x) bounds.left = x;
-			if (bounds.bottom < y + h) bounds.bottom = y + h;
-			if (bounds.right < x + w) bounds.right = x + w;
+		__forceinline void update_bounds(int x, int y) {
+			if (bounds.x < x) bounds.x = x;
+			if (bounds.y < y) bounds.y = y;
 		}
 
 		__forceinline void reset_bounds() {
-			bounds.top = 0;
-			bounds.left = 0;
-			bounds.bottom = 0;
-			bounds.right = 0;
+			bounds.x = 0;
+			bounds.y = 0;
 		}
 	};
 
@@ -61,16 +50,16 @@ public:
 	virtual void unreg(wh_api::i_thud *thud);
 };
 
-#define filled_rect(_x, _y, w, h, color)      \
-	update_bounds(pos.x + _x, pos.y + _y, w, h); \
+#define filled_rect(_x, _y, w, h, color) \
+	update_bounds(_x + w, _y + h);          \
 	wh->render->draw_filled_rect(pos.x + _x, pos.y + _y, w, h, color);
 
-#define outlined_rect(_x, _y, w, h, color)    \
-	update_bounds(pos.x + _x, pos.y + _y, w, h); \
+#define outlined_rect(_x, _y, w, h, color) \
+	update_bounds(_x + w, _y + h);            \
 	wh->render->draw_outlined_rect(pos.x + _x, pos.y + _y, w, h, color);
 
-#define line(_x, _y, w, h, color)             \
-	update_bounds(pos.x + _x, pos.y + _y, w, h); \
+#define line(_x, _y, w, h, color) \
+	update_bounds(_x + w, _y + h);   \
 	wh->render->draw_line(pos.x + _x, pos.y + _y, w, h, color);
 
 #define init_font(font, font_name, size, bold, flags) \
@@ -79,7 +68,7 @@ public:
 #define text(_x, _y, font, color, center, text)                        \
 	{                                                                     \
 		auto size = wh->render->get_text_size(font, text);                   \
-		update_bounds(pos.x + _x, pos.y + _y, x + size.x, y + size.y);       \
+		update_bounds(x + size.x, y + size.y);                               \
 		wh->render->text(pos.x + _x, pos.y + _y, font, color, center, text); \
 	}
 
@@ -87,7 +76,7 @@ public:
 	wh->render->get_text_size(font, text);
 
 #define texture(_x, _y, w, h, texture, color) \
-	update_bounds(pos.x + _x, pos.y + _y, w, h); \
+	update_bounds(_x + w, _y + h);               \
 	wh->render->draw_texture(pos.x + _x, pos.y + _y, w, h, texture, color);
 
 #define screen_size() \

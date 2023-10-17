@@ -65,15 +65,15 @@ public:
 #define init_font(font, font_name, size, bold, flags) \
 	wh->render->create_font(font, font_name, size, bold, flags);
 
-#define text(_x, _y, font, color, center, text)                        \
-	{                                                                     \
-		auto size = wh->render->get_text_size(font, text);                   \
-		update_bounds(x + size.x, y + size.y);                               \
-		wh->render->text(pos.x + _x, pos.y + _y, font, color, center, text); \
+#define text(_x, _y, font, color, center, text)                             \
+	{                                                                          \
+		auto size = wh->render->get_text_size(font, text);                        \
+		update_bounds(_x + size.x, _y + size.y);                                  \
+		wh->render->draw_text(pos.x + _x, pos.y + _y, font, color, center, text); \
 	}
 
-#define text_size(font, text) \
-	wh->render->get_text_size(font, text);
+#define text_size(font, txt) \
+	wh->render->get_text_size(font, txt);
 
 #define texture(_x, _y, w, h, texture, color) \
 	update_bounds(_x + w, _y + h);               \

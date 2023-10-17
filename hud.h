@@ -1,8 +1,7 @@
 #pragma once
 
 #include "source_sdk.h"
-
-#include <string>
+#include "utils.h"
 
 namespace wh_api {
 	class hud_t {

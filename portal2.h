@@ -24,7 +24,7 @@ namespace offsets {
 	offset(execute_client_cmd, 104, 104);
 	offset(draw_set_color, 14, 13);
 	offset(draw_filled_rect, 15, 15);
-	offset(draw_outlined_rect, 16, 16);
+	offset(draw_outlined_rect, 17, 17);
 	offset(draw_line, 18, 18);
 	offset(draw_colored_text, 160, 160);
 	offset(create_font, 69, 69);

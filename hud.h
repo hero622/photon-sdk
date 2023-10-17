@@ -21,10 +21,10 @@ namespace wh_api {
 
 	protected:
 		__forceinline void update_bounds(int x, int y, int w, int h) {
-			if (bounds.top < y) bounds.top = y;
-			if (bounds.left < x) bounds.left = x;
-			if (bounds.bottom < y + h) bounds.bottom = y + h;
-			if (bounds.right < x + w) bounds.right = x + w;
+			if (bounds.top < y) bounds.top = pos.y + y;
+			if (bounds.left < x) bounds.left = pos.x + x;
+			if (bounds.bottom < y + h) bounds.bottom = pos.y + y + h;
+			if (bounds.right < x + w) bounds.right = pos.x + x + w;
 		}
 
 		__forceinline void reset_bounds() {

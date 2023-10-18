@@ -29,15 +29,25 @@ namespace wh_api {
 		virtual const char *get_name() = 0;
 	};
 
-	class i_thud {
+	class i_thud : public hud_t {
 	public:
-		sdk::vec2_t pos;
-		sdk::vec2_t anchor;
-		float scale;
 		sdk::h_font font;
+		const char *format = "{name}: {value}";
 
 		virtual const char *get_text() = 0;
 		virtual const char *get_name() = 0;
+
+	protected:
+		std::string formatted_text;
+
+		void format_text(const char *value) {
+			auto text = std::string(format);
+
+			utils::string::replace(text, "{name}", std::string(get_name()));
+			utils::string::replace(text, "{value}", std::string(value));
+
+			formatted_text = text;
+		}
 	};
 }  // namespace wh_api
 
@@ -66,7 +76,7 @@ public:
 
 #define text(_x, _y, font, color, center, text)                             \
 	{                                                                          \
-		auto size = wh->render->get_text_size(font, text);                        \
+		const auto size = wh->render->get_text_size(font, text);                  \
 		update_bounds(_x + size.x, _y + size.y);                                  \
 		wh->render->draw_text(pos.x + _x, pos.y + _y, font, color, center, text); \
 	}
@@ -80,3 +90,11 @@ public:
 
 #define screen_size() \
 	wh->render->get_screen_size();
+
+#define thud_text(txt)                                               \
+	{                                                                   \
+		format_text(txt);                                                  \
+		const auto size = wh->render->get_text_size(font, formatted_text); \
+		update_bounds(size.x, size.y);                                     \
+		return formatted_text;                                             \
+	}

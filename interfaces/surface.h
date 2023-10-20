@@ -44,6 +44,9 @@ public:
 	void get_screen_size(int &wide, int &tall) {
 		return utils::memory::call_virtual<void>(offsets::get_screen_size, this, &wide, &tall);
 	}
+	void unlock_cursor() {
+		return utils::memory::call_virtual<void>(offsets::unlock_cursor, this);
+	}
 	sdk::h_font create_font() {
 		return utils::memory::call_virtual<sdk::h_font>(offsets::create_font, this);
 	}

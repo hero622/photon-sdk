@@ -5,6 +5,7 @@
 #include "interfaces/engine_client.h"
 #include "interfaces/input_system.h"
 #include "interfaces/mem_alloc.h"
+#include "interfaces/scheme.h"
 #include "interfaces/surface.h"
 #include "utils.h"
 
@@ -45,4 +46,7 @@ public:
 	void *engine_vgui_internal;
 	i_mem_alloc *mem_alloc;
 	i_input_system *input_system;
+	void *base_client_dll;
+	i_scheme_manager *scheme_manager;
+	i_scheme *scheme;
 };

@@ -39,13 +39,19 @@ namespace offsets {
 	offset(is_texture_id_valid, 40, 40);
 	offset(create_new_texture_id, 41, 41);
 	offset(get_screen_size, 42, 42);
+	offset(unlock_cursor, 64, 64);
+	offset(lock_cursor, 65, 65);
 	offset(paint, 14, 15);
+	offset(on_screen_size_changed, 114, 114);
 	offset(paint_traverse_ex, 117, 117);
 	offset(start_drawing, 127, 1341);
 	offset(finish_drawing, 603, 355);
 	offset(enable_input, 10, 10);
 	offset(is_button_down, 14, 14);
 	offset(get_cursor_position, 45, 45);
+	offset(in_key_event, 20, 20);
+	offset(get_font, 3, 4);
+	offset(get_i_scheme, 8, 9);
 }  // namespace offsets
 
 namespace signatures {

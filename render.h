@@ -14,4 +14,5 @@ public:
 	virtual sdk::vec2_t get_text_size(sdk::h_font font, std::string text);
 	virtual void draw_texture(int x, int y, int w, int h, std::string texture, sdk::color_t color = sdk::color_t(255, 255, 255, 255));
 	virtual sdk::vec2_t get_screen_size();
+	virtual sdk::h_font get_font(int id);
 };

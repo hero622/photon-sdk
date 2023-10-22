@@ -91,10 +91,9 @@ public:
 #define screen_size() \
 	wh->render->get_screen_size();
 
-#define thud_text(txt)                                               \
-	{                                                                   \
-		format_text(txt);                                                  \
-		const auto size = wh->render->get_text_size(font, formatted_text); \
-		update_bounds(size.x, size.y);                                     \
-		return formatted_text.c_str();                                     \
+#define thud_text(txt)                                      \
+	{                                                          \
+		format_text(txt);                                         \
+		bounds = wh->render->get_text_size(font, formatted_text); \
+		return formatted_text.c_str();                            \
 	}

@@ -44,6 +44,8 @@ namespace offsets {
 	offset(paint, 14, 15);
 	offset(on_screen_size_changed, 114, 114);
 	offset(paint_traverse_ex, 117, 117);
+	offset(get_clip_rect, 144, 144);
+	offset(set_clip_rect, 145, 145);
 	offset(start_drawing, 127, 1341);
 	offset(finish_drawing, 603, 355);
 	offset(enable_input, 10, 10);

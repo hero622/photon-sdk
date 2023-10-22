@@ -56,6 +56,12 @@ public:
 	void get_text_size(sdk::h_font font, const wchar_t *text, int &wide, int &tall) {
 		return utils::memory::call_virtual<void>(offsets::get_text_size, this, font, text, &wide, &tall);
 	}
+	void get_clip_rect(int &x0, int &y0, int &x1, int &y1) {
+		return utils::memory::call_virtual<void>(offsets::get_clip_rect, this, &x0, &y0, &x1, &y1);
+	}
+	void set_clip_rect(int x0, int y0, int x1, int y1) {
+		return utils::memory::call_virtual<void>(offsets::set_clip_rect, this, x0, y0, x1, y1);
+	}
 	void draw_colored_text(sdk::h_font font, int x, int y, int r, int g, int b, int a, const char *text) {
 		// !!! this is __cdecl because it has varargs
 		using fn_t = void(__cdecl *)(void *, sdk::h_font, int, int, int, int, int, int, const char *);
@@ -69,4 +75,9 @@ public:
 		auto paint_traverse_ex = utils::memory::get_virtual(this, offsets::paint_traverse_ex);
 		return utils::memory::read<void(__rescall *)()>(paint_traverse_ex + offsets::finish_drawing)();
 	}
+
+private:
+	char pad_0000[0x280];  //	0x0000
+public:
+	bool enable_clipping;  //	0x0280
 };

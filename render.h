@@ -15,4 +15,6 @@ public:
 	virtual void draw_texture(int x, int y, int w, int h, std::string texture, sdk::color_t color = sdk::color_t(255, 255, 255, 255));
 	virtual sdk::vec2_t get_screen_size();
 	virtual sdk::h_font get_font(int id);
+	virtual sdk::vec2_t normalize(sdk::vec2_t vec);
+	virtual sdk::vec2_t to_screen(sdk::vec2_t vec);
 };

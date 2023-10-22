@@ -61,24 +61,24 @@ public:
 
 #define filled_rect(_x, _y, w, h, color) \
 	update_bounds(_x + w, _y + h);          \
-	wh->render->draw_filled_rect(pos.x + _x, pos.y + _y, w, h, color);
+	wh->render->draw_filled_rect(wh->render->to_screen(pos).x + _x, wh->render->to_screen(pos).y + _y, w, h, color);
 
 #define outlined_rect(_x, _y, w, h, color) \
 	update_bounds(_x + w, _y + h);            \
-	wh->render->draw_outlined_rect(pos.x + _x, pos.y + _y, w, h, color);
+	wh->render->draw_outlined_rect(wh->render->to_screen(pos).x + _x, wh->render->to_screen(pos).y + _y, w, h, color);
 
 #define line(_x, _y, w, h, color) \
 	update_bounds(_x + w, _y + h);   \
-	wh->render->draw_line(pos.x + _x, pos.y + _y, w, h, color);
+	wh->render->draw_line(wh->render->to_screen(pos).x + _x, wh->render->to_screen(pos).y + _y, w, h, color);
 
 #define init_font(font, font_name, size, bold, flags) \
 	wh->render->create_font(font, font_name, size, bold, flags);
 
-#define text(_x, _y, font, color, center, text)                             \
-	{                                                                          \
-		const auto size = wh->render->get_text_size(font, text);                  \
-		update_bounds(_x + size.x, _y + size.y);                                  \
-		wh->render->draw_text(pos.x + _x, pos.y + _y, font, color, center, text); \
+#define text(_x, _y, font, color, center, text)                                                                           \
+	{                                                                                                                        \
+		const auto size = wh->render->get_text_size(font, text);                                                                \
+		update_bounds(_x + size.x, _y + size.y);                                                                                \
+		wh->render->draw_text(wh->render->to_screen(pos).x + _x, wh->render->to_screen(pos).y + _y, font, color, center, text); \
 	}
 
 #define text_size(font, txt) \
@@ -86,7 +86,7 @@ public:
 
 #define texture(_x, _y, w, h, texture, color) \
 	update_bounds(_x + w, _y + h);               \
-	wh->render->draw_texture(pos.x + _x, pos.y + _y, w, h, texture, color);
+	wh->render->draw_texture(wh->render->to_screen(pos).x + _x, wh->render->to_screen(pos).y + _y, w, h, texture, color);
 
 #define screen_size() \
 	wh->render->get_screen_size();

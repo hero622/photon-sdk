@@ -18,6 +18,9 @@ public:
 	int get_active_split_screen_slot() {
 		return utils::memory::call_virtual<int>(offsets::get_active_split_screen_slot, this);
 	}
+	void *get_input_context(int id) {
+		return utils::memory::call_virtual<void *>(offsets::get_input_context, this, id);
+	}
 
 public:
 	void cbuf_add(const char *text, int delay) {

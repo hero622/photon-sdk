@@ -14,3 +14,10 @@ public:
 		return utils::memory::call_virtual<void>(offsets::get_cursor_position, this, x, y);
 	}
 };
+
+class i_input_stack_system {
+public:
+	void set_cursor_visible(void *context, bool visible) {
+		return utils::memory::call_virtual<void>(offsets::set_cursor_visible, this, context, visible);
+	}
+};

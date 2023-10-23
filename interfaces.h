@@ -49,4 +49,5 @@ public:
 	void *base_client_dll;
 	i_scheme_manager *scheme_manager;
 	i_scheme *scheme;
+	i_input_stack_system *input_stack_system;
 };

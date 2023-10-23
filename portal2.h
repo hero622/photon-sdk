@@ -21,6 +21,7 @@ namespace offsets {
 	offset(set_signon_state, 15, 36);
 	offset(cbuf_add_text, 46, 35);
 	offset(get_active_split_screen_slot, 127, 127);
+	offset(get_input_context, 190, 190);
 	offset(execute_client_cmd, 104, 104);
 	offset(draw_set_color, 14, 13);
 	offset(draw_filled_rect, 15, 15);
@@ -54,6 +55,7 @@ namespace offsets {
 	offset(in_key_event, 20, 20);
 	offset(get_font, 3, 4);
 	offset(get_i_scheme, 8, 9);
+	offset(set_cursor_visible, 11, 11);
 }  // namespace offsets
 
 namespace signatures {

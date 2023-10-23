@@ -1,6 +1,7 @@
 #pragma once
 
 #include "convar.h"
+#include "draw_call.h"
 #include "events.h"
 #include "hook.h"
 #include "hud.h"

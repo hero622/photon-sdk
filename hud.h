@@ -1,7 +1,10 @@
 #pragma once
 
+#include "draw_call.h"
 #include "source_sdk.h"
 #include "utils.h"
+
+#include <vector>
 
 namespace wh_api {
 	class hud_t {
@@ -10,23 +13,31 @@ namespace wh_api {
 		sdk::vec2_t anchor;
 		float scale;
 		sdk::vec2_t bounds;
-
-	protected:
-		__forceinline void update_bounds(int x, int y) {
-			if (bounds.x < x) bounds.x = x;
-			if (bounds.y < y) bounds.y = y;
-		}
-
-		__forceinline void reset_bounds() {
-			bounds.x = 0;
-			bounds.y = 0;
-		}
 	};
 
 	class i_hud : public hud_t {
 	public:
+		std::vector<draw_call::draw_call_t *> draw_calls;
+
 		virtual void paint() = 0;
 		virtual const char *get_name() = 0;
+
+	protected:
+		__forceinline void draw_filled_rect(int x, int y, int w, int h, sdk::color_t color) {
+			draw_calls.push_back(new draw_call::filled_rect(x, y, w, h, color));
+		}
+		__forceinline void draw_outlined_rect(int x, int y, int w, int h, sdk::color_t color) {
+			draw_calls.push_back(new draw_call::outlined_rect(x, y, w, h, color));
+		}
+		__forceinline void draw_line(int x, int y, int w, int h, sdk::color_t color) {
+			draw_calls.push_back(new draw_call::line(x, y, w, h, color));
+		}
+		__forceinline void draw_text(int x, int y, sdk::h_font font, sdk::color_t color, bool center, std::string text) {
+			draw_calls.push_back(new draw_call::text(x, y, font, color, center, text));
+		}
+		__forceinline void draw_texture(int x, int y, int w, int h, std::string texture, sdk::color_t color = sdk::color_t(255, 255, 255, 255)) {
+			draw_calls.push_back(new draw_call::texture(x, y, w, h, texture, color));
+		}
 	};
 
 	class i_thud : public hud_t {
@@ -36,18 +47,6 @@ namespace wh_api {
 
 		virtual const char *get_text() = 0;
 		virtual const char *get_name() = 0;
-
-	protected:
-		std::string formatted_text;
-
-		void format_text(const char *value) {
-			auto text = std::string(format);
-
-			utils::string::replace(text, "{name}", std::string(get_name()));
-			utils::string::replace(text, "{value}", std::string(value));
-
-			formatted_text = text;
-		}
 	};
 }  // namespace wh_api
 
@@ -58,42 +57,3 @@ public:
 	virtual void unreg(wh_api::i_hud *hud);
 	virtual void unreg(wh_api::i_thud *thud);
 };
-
-#define filled_rect(_x, _y, w, h, color) \
-	update_bounds(_x + w, _y + h);          \
-	wh->render->draw_filled_rect(wh->render->to_screen(pos).x + _x, wh->render->to_screen(pos).y + _y, w, h, color);
-
-#define outlined_rect(_x, _y, w, h, color) \
-	update_bounds(_x + w, _y + h);            \
-	wh->render->draw_outlined_rect(wh->render->to_screen(pos).x + _x, wh->render->to_screen(pos).y + _y, w, h, color);
-
-#define line(_x, _y, w, h, color) \
-	update_bounds(_x + w, _y + h);   \
-	wh->render->draw_line(wh->render->to_screen(pos).x + _x, wh->render->to_screen(pos).y + _y, w, h, color);
-
-#define init_font(font, font_name, size, bold, flags) \
-	wh->render->create_font(font, font_name, size, bold, flags);
-
-#define text(_x, _y, font, color, center, text)                                                                           \
-	{                                                                                                                        \
-		const auto size = wh->render->get_text_size(font, text);                                                                \
-		update_bounds(_x + size.x, _y + size.y);                                                                                \
-		wh->render->draw_text(wh->render->to_screen(pos).x + _x, wh->render->to_screen(pos).y + _y, font, color, center, text); \
-	}
-
-#define text_size(font, txt) \
-	wh->render->get_text_size(font, txt);
-
-#define texture(_x, _y, w, h, texture, color) \
-	update_bounds(_x + w, _y + h);               \
-	wh->render->draw_texture(wh->render->to_screen(pos).x + _x, wh->render->to_screen(pos).y + _y, w, h, texture, color);
-
-#define screen_size() \
-	wh->render->get_screen_size();
-
-#define thud_text(txt)                                                            \
-	{                                                                                \
-		format_text(txt);                                                               \
-		bounds = wh->render->get_text_size(wh->render->get_font(font), formatted_text); \
-		return formatted_text.c_str();                                                  \
-	}

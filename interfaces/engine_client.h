@@ -24,7 +24,4 @@ public:
 		auto target = this->get_active_split_screen_slot();
 		this->cbuf_add_text(target, text, delay);
 	}
-	void safe_unload() {
-		this->client_cmd("wh_exit");
-	}
 };

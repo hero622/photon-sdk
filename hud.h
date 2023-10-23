@@ -31,7 +31,7 @@ namespace wh_api {
 
 	class i_thud : public hud_t {
 	public:
-		sdk::h_font font;
+		unsigned long font;
 		const char *format = "{name}: {value}";
 
 		virtual const char *get_text() = 0;

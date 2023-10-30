@@ -24,16 +24,16 @@ namespace wh_api {
 
 	class i_wormhole_mod {
 	public:
-		virtual bool load(c_shared *wh) = 0;
-		virtual void unload() = 0;
-		virtual void on_event(const char *msg) = 0;
-		virtual const char *get_name() = 0;
+		virtual bool load( c_shared *wh ) = 0;
+		virtual void unload( ) = 0;
+		virtual void on_event( const char *msg ) = 0;
+		virtual const char *get_name( ) = 0;
 	};
 }  // namespace wh_api
 
 extern wh_api::c_shared *wh;
 
-#define expose_wormhole_mod(class_t, name) \
-	dll_export class_t *create_mod() {        \
-		return static_cast<class_t *>(&name);    \
+#define expose_wormhole_mod( class_t, name ) \
+	dll_export class_t *create_mod( ) {         \
+		return static_cast<class_t *>( &name );    \
 	}

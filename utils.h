@@ -7,8 +7,8 @@ namespace utils {}
 #include "utils/platform.h"
 #include "utils/string.h"
 
-#define delete_ptr(ptr) \
-	if (ptr) {             \
-		delete ptr;           \
-		ptr = nullptr;        \
+#define delete_ptr( ptr ) \
+	if ( ptr ) {             \
+		delete ptr;             \
+		ptr = nullptr;          \
 	}

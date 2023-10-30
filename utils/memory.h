@@ -18,51 +18,51 @@
 namespace utils {
 	namespace memory {
 		struct module_info_t {
-			char name[MAX_PATH];
-			char path[MAX_PATH];
+			char name[ MAX_PATH ];
+			char path[ MAX_PATH ];
 			std::uintptr_t addr;
 			std::size_t size;
 		};
 		static std::vector<module_info_t> g_module_info;
 
-		bool get_module_info(const char *module_name, module_info_t *module_info);
-		std::uint8_t *pattern_scan(const char *module_name, const char *signature) noexcept;
+		bool get_module_info( const char *module_name, module_info_t *module_info );
+		std::uint8_t *pattern_scan( const char *module_name, const char *signature ) noexcept;
 
 		template <typename t, typename... args_t>
-		__forceinline t call_virtual(std::size_t index, void *name, args_t... args) {
-			using fn_t = t(__rescall *)(void *, args_t...);
+		__forceinline t call_virtual( std::size_t index, void *name, args_t... args ) {
+			using fn_t = t( __rescall * )( void *, args_t... );
 
-			auto fn = (*reinterpret_cast<fn_t **>(name))[index];
-			return fn(name, args...);
+			auto fn = ( *reinterpret_cast<fn_t **>( name ) )[ index ];
+			return fn( name, args... );
 		}
 
-		__forceinline unsigned int get_virtual(void *name, unsigned int index) {
-			return static_cast<unsigned int>((*static_cast<int **>(name))[index]);
-		}
-
-		template <typename t>
-		__forceinline t read(std::uintptr_t source) {
-			auto rel = *reinterpret_cast<int *>(source);
-			return (t)(source + rel + sizeof(rel));
+		__forceinline unsigned int get_virtual( void *name, unsigned int index ) {
+			return static_cast<unsigned int>( ( *static_cast<int **>( name ) )[ index ] );
 		}
 
 		template <typename t>
-		__forceinline t get_sym_addr(void *module_handle, const char *sym) {
+		__forceinline t read( std::uintptr_t source ) {
+			auto rel = *reinterpret_cast<int *>( source );
+			return ( t ) ( source + rel + sizeof( rel ) );
+		}
+
+		template <typename t>
+		__forceinline t get_sym_addr( void *module_handle, const char *sym ) {
 #ifdef _WIN32
-			return (t)GetProcAddress((HMODULE)module_handle, sym);
+			return ( t ) GetProcAddress( ( HMODULE ) module_handle, sym );
 #else
-			return (t)dlsym(module_handle, sym);
+			return ( t ) dlsym( module_handle, sym );
 #endif
 		}
 
-		__forceinline void *get_module_handle(const char *module_name) {
-			auto info = module_info_t();
-			if (!get_module_info(module_name, &info))
+		__forceinline void *get_module_handle( const char *module_name ) {
+			auto info = module_info_t( );
+			if ( !get_module_info( module_name, &info ) )
 				return nullptr;
 #ifdef _WIN32
-			return GetModuleHandleA(info.path);
+			return GetModuleHandleA( info.path );
 #else
-			return dlopen(info.path, RTLD_NOLOAD | RTLD_NOW);
+			return dlopen( info.path, RTLD_NOLOAD | RTLD_NOW );
 #endif
 		}
 	}  // namespace memory

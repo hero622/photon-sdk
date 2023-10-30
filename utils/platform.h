@@ -11,10 +11,10 @@
 
 #	define dll_export extern "C" __declspec( dllexport )
 
-#	define decl_hk( t, name, ... )                                \
-		static inline void *name##_hk;                                \
-		static inline t( __rescall *name )( void *ecx, __VA_ARGS__ ); \
-		static t __fastcall name##_hk_fn( void *ecx, int edx, __VA_ARGS__ )
+#	define decl_hk( t, name, ... )                         \
+		inline void *name##_hk;                                \
+		inline t( __rescall *name )( void *ecx, __VA_ARGS__ ); \
+		t __fastcall name##_hk_fn( void *ecx, int edx, __VA_ARGS__ )
 
 #	define hk_fn( t, name, ... ) \
 		t __fastcall name##_hk_fn( void *ecx, int edx, __VA_ARGS__ )
@@ -34,10 +34,10 @@
 
 #	define dll_export extern "C" __attribute__( ( visibility( "default" ) ) )
 
-#	define decl_hk( t, name, ... )                                  \
-		static inline void *name##_hk;                                  \
-		static inline t( __rescall *name )( void *ecx, ##__VA_ARGS__ ); \
-		static t __rescall name##_hk_fn( void *ecx, ##__VA_ARGS__ )
+#	define decl_hk( t, name, ... )                           \
+		inline void *name##_hk;                                  \
+		inline t( __rescall *name )( void *ecx, ##__VA_ARGS__ ); \
+		t __rescall name##_hk_fn( void *ecx, ##__VA_ARGS__ )
 
 #	define hk_fn( t, name, ... ) \
 		t __rescall name##_hk_fn( void *ecx, ##__VA_ARGS__ )

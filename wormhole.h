@@ -7,6 +7,7 @@
 #include "hud.h"
 #include "input.h"
 #include "interfaces.h"
+#include "menu.h"
 #include "render.h"
 #include "source_sdk.h"
 #include "utils.h"
@@ -20,6 +21,12 @@ namespace wh_api {
 		c_huds *huds;
 		c_render *render;
 		c_input *input;
+		c_menu *menu;
+	};
+
+	struct wh_mod_info_t {
+		const char *name;
+		const char *version;
 	};
 
 	class i_wormhole_mod {
@@ -27,7 +34,8 @@ namespace wh_api {
 		virtual bool load( c_shared *wh ) = 0;
 		virtual void unload( ) = 0;
 		virtual void on_event( const char *msg ) = 0;
-		virtual const char *get_name( ) = 0;
+		virtual wh_mod_info_t *get_info( ) = 0;
+		virtual void paint_menu( ) = 0;
 	};
 }  // namespace wh_api
 

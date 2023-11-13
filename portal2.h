@@ -53,7 +53,6 @@ namespace offsets {
 	offset( is_button_down, 14, 14 );
 	offset( get_cursor_position, 45, 45 );
 	offset( in_key_event, 20, 20 );
-	// offset( handle_game_ui_event, 11, 12 ); idk this yet :/
 	offset( get_font, 3, 4 );
 	offset( get_i_scheme, 8, 9 );
 	offset( set_cursor_visible, 11, 11 );

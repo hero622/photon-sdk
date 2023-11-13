@@ -7,8 +7,7 @@
 #include <vector>
 
 namespace wh_api {
-	class hud_t {
-	public:
+	struct hud_t {
 		sdk::vec2_t pos;
 		sdk::vec2_t anchor;
 		float scale;

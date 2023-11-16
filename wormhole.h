@@ -16,6 +16,7 @@ namespace wh_api {
 	class c_shared {
 	public:
 		c_portal2 *portal2;
+		c_convar *cvars;
 		c_hook *hook;
 		c_events *events;
 		c_huds *huds;

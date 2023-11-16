@@ -21,7 +21,7 @@ public:
 	wh->hook->remove_hook( name##_hk )
 
 #define hk_cmd( name ) \
-	c_command::hook( #name, name##_hk, name );
+	wh->cvars->hook_cmd( #name, name##_hk, name );
 
 #define unhk_cmd( name ) \
-	c_command::unhook( #name, name );
+	wh->cvars->unhook_cmd( #name, name );

@@ -59,8 +59,8 @@ namespace offsets {
 }  // namespace offsets
 
 namespace signatures {
-	signature( create, "55 8B EC 8B 45 0C 56 8B F1 89 76 1C", "57 BA ? ? ? ? 56" );
-	signature( dtor, "55 8B EC 56 8B F1 8B 46 24", "53 83 EC 08 8B 5C 24 10 8B 43 24" );
+	signature( convar_ctor, "55 8B EC F3 0F 10 45 ? 8B 55 14", "" );
+	signature( convar_dtor, "55 8B EC 56 8B F1 8B 46 24", "53 83 EC 08 8B 5C 24 10 8B 43 24" );
 }  // namespace signatures
 
 namespace symbols {

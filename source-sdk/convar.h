@@ -35,7 +35,7 @@ namespace sdk {
 #ifndef _WIN32
 		virtual void _dtor1( ) { };
 #endif
-		virtual bool is_enabled( ) const { return false; };
+		virtual bool is_command( ) const { return false; };
 
 		con_command_base *next;
 		bool registered;

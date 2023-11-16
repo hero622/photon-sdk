@@ -2,40 +2,40 @@
 
 #include "wormhole.h"
 
-wh_api::draw_call::filled_rect::filled_rect( int x, int y, int w, int h, sdk::color_t color ) {
+draw_call::filled_rect::filled_rect( int x, int y, int w, int h, sdk::color_t color ) {
 	this->x = x;
 	this->y = y;
 	this->w = w;
 	this->h = h;
 	this->color = color;
 }
-void wh_api::draw_call::filled_rect::call( ) {
+void draw_call::filled_rect::call( ) {
 	wh->render->draw_filled_rect( x, y, w, h, color );
 }
 
-wh_api::draw_call::outlined_rect::outlined_rect( int x, int y, int w, int h, sdk::color_t color ) {
+draw_call::outlined_rect::outlined_rect( int x, int y, int w, int h, sdk::color_t color ) {
 	this->x = x;
 	this->y = y;
 	this->w = w;
 	this->h = h;
 	this->color = color;
 }
-void wh_api::draw_call::outlined_rect::call( ) {
+void draw_call::outlined_rect::call( ) {
 	wh->render->draw_outlined_rect( x, y, w, h, color );
 }
 
-wh_api::draw_call::line::line( int x, int y, int w, int h, sdk::color_t color ) {
+draw_call::line::line( int x, int y, int w, int h, sdk::color_t color ) {
 	this->x = x;
 	this->y = y;
 	this->w = w;
 	this->h = h;
 	this->color = color;
 }
-void wh_api::draw_call::line::call( ) {
+void draw_call::line::call( ) {
 	wh->render->draw_line( x, y, w, h, color );
 }
 
-wh_api::draw_call::text::text( int x, int y, sdk::h_font font, sdk::color_t color, bool center, std::string txt ) {
+draw_call::text::text( int x, int y, sdk::h_font font, sdk::color_t color, bool center, std::string txt ) {
 	this->x = x;
 	this->y = y;
 	this->font = font;
@@ -47,11 +47,11 @@ wh_api::draw_call::text::text( int x, int y, sdk::h_font font, sdk::color_t colo
 	this->w = text_size.x;
 	this->h = text_size.y;
 }
-void wh_api::draw_call::text::call( ) {
+void draw_call::text::call( ) {
 	wh->render->draw_text( x, y, font, color, center, txt );
 }
 
-wh_api::draw_call::texture::texture( int x, int y, int w, int h, std::string path, sdk::color_t color ) {
+draw_call::texture::texture( int x, int y, int w, int h, std::string path, sdk::color_t color ) {
 	this->x = x;
 	this->y = y;
 	this->w = w;
@@ -59,6 +59,6 @@ wh_api::draw_call::texture::texture( int x, int y, int w, int h, std::string pat
 	this->path = path;
 	this->color = color;
 }
-void wh_api::draw_call::texture::call( ) {
+void draw_call::texture::call( ) {
 	wh->render->draw_texture( x, y, w, h, path, color );
 }

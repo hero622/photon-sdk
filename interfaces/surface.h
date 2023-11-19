@@ -63,7 +63,7 @@ public:
 		return utils::memory::call_virtual<void>( offsets::set_clip_rect, this, x0, y0, x1, y1 );
 	}
 	void draw_colored_text( sdk::h_font font, int x, int y, int r, int g, int b, int a, const char *text ) {
-		// !!! this is __cdecl because it has varargs
+		//	!!! this is __cdecl because it has varargs
 		using fn_t = void( __cdecl * )( void *, sdk::h_font, int, int, int, int, int, int, const char * );
 		return ( *reinterpret_cast<fn_t **>( this ) )[ offsets::draw_colored_text ]( this, font, x, y, r, g, b, a, text );
 	}

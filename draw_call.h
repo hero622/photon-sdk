@@ -4,6 +4,8 @@
 
 #include <string>
 
+// THIS WHOLE THING NEEDS A REWORK
+
 namespace draw_call {
 	struct draw_call_t {
 		int x, y, w, h;

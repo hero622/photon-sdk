@@ -2,6 +2,8 @@
 
 #include "wormhole.h"
 
+// THIS WHOLE THING NEEDS A REWORK
+
 draw_call::filled_rect::filled_rect( int x, int y, int w, int h, sdk::color_t color ) {
 	this->x = x;
 	this->y = y;

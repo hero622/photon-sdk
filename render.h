@@ -15,6 +15,6 @@ public:
 	virtual void draw_texture( int x, int y, int w, int h, std::string texture, sdk::color_t color = sdk::color_t( 255, 255, 255, 255 ) );
 	virtual sdk::vec2_t get_screen_size( );
 	virtual sdk::h_font get_font( unsigned long id );
-	virtual sdk::vec2_t normalize( sdk::vec2_t vec );  //	Translate screen X, Y pixel position to a normal value between (0, 1).
-	virtual sdk::vec2_t to_screen( sdk::vec2_t vec );  //	Translate X, Y position between (0, 1) to a position on the screen.
+	virtual sdk::vec2_t normalize( sdk::vec2_t vec );  // Translate screen X, Y pixel position to a normal value between (0, 1).
+	virtual sdk::vec2_t to_screen( sdk::vec2_t vec );  // Translate X, Y position between (0, 1) to a position on the screen.
 };

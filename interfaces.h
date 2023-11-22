@@ -50,4 +50,5 @@ public:
 	i_scheme_manager *scheme_manager;
 	i_scheme *scheme;
 	i_input_stack_system *input_stack_system;
+	void *vgui_input;
 };

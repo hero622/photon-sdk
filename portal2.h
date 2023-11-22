@@ -56,6 +56,9 @@ namespace offsets {
 	offset( get_font, 3, 4 );
 	offset( get_i_scheme, 8, 9 );
 	offset( set_cursor_visible, 11, 11 );
+	offset( update_button_state, 87, 88 );
+	offset( context, 3304, 3304 );
+	offset( reset_input_context, 88, 89 );
 }  // namespace offsets
 
 namespace signatures {

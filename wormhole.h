@@ -35,7 +35,7 @@ namespace wh_api {
 		virtual bool load( c_shared *wh ) = 0;         // Called on mod load, return if load was successful or not.
 		virtual void unload( ) = 0;                    // Called on mod unload.
 		virtual void on_event( const char *msg ) = 0;  // Callback for all events, `msg` contains event name.
-		virtual wh_mod_info_t *get_info( ) = 0;        // Return mod info here.
+		virtual wh_mod_info_t get_info( ) = 0;         // Return mod info here.
 		virtual void paint_menu( ) = 0;                // Called every frame when mod's settings menu is shown.
 	};
 }  // namespace wh_api

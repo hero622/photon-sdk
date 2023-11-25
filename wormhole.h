@@ -1,8 +1,8 @@
 #pragma once
 
-#include "convar.h"
+#include "ccon.h"
 #include "draw_call.h"
-#include "events.h"
+#include "event.h"
 #include "hook.h"
 #include "hud.h"
 #include "input.h"
@@ -16,10 +16,10 @@ namespace wh_api {
 	class c_shared {
 	public:
 		c_portal2 *portal2;  // Contains game interfaces exposed by Wormhole.
-		c_convar *cvars;     // Create ConVars and ConCommands.
+		c_con *con;          // Create ConVars and ConCommands.
 		c_hook *hook;        // Hook virtual/inline functions.
-		c_events *events;    // Post events to other plugins.
-		c_huds *huds;        // Register HUDs and THUDs.
+		c_event *event;      // Post events to other plugins.
+		c_hud *hud;          // Register HUDs and THUDs.
 		c_render *render;    // Wrapper around Source's Surface interface.
 		c_input *input;      // Wrapper around Source's InputSystem interface.
 		c_menu *menu;        // Wormhole's own menu framework.

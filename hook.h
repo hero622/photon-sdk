@@ -1,6 +1,6 @@
 #pragma once
 
-#include "convar.h"
+#include "ccon.h"
 #include "utils.h"
 
 class c_hook {
@@ -21,7 +21,7 @@ public:
 	wh->hook->remove_hook( name##_hk )
 
 #define hk_cmd( name ) \
-	wh->cvars->hook_cmd( #name, name##_hk, name );
+	wh->con->hook_cmd( #name, name##_hk, name );
 
 #define unhk_cmd( name ) \
-	wh->cvars->unhook_cmd( #name, name );
+	wh->con->unhook_cmd( #name, name );

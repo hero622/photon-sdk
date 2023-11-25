@@ -50,7 +50,7 @@ namespace wh_api {
 	};
 }  // namespace wh_api
 
-class c_huds {
+class c_hud {
 public:
 	virtual void reg( wh_api::i_hud *hud );      // Register a HUD component by pointer.
 	virtual void reg( wh_api::i_thud *thud );    // Register a THUD component by pointer.

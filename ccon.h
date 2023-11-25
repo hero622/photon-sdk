@@ -1,10 +1,12 @@
+// i wanted to call this "con" but windows wasnt letting me >:(
+
 #pragma once
 
 #include "source_sdk.h"
 
 #include <unordered_map>
 
-class c_convar {
+class c_con {
 private:
 	std::unordered_map<const char *, sdk::con_var *> convars;
 	std::unordered_map<const char *, sdk::con_command *> concmds;

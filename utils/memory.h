@@ -20,7 +20,7 @@ namespace utils {
 		struct module_info_t {
 			char name[ MAX_PATH ];
 			char path[ MAX_PATH ];
-			std::uint8_t *addr;
+			std::uintptr_t addr;
 			std::size_t size;
 		};
 		static std::vector<module_info_t> g_module_info;

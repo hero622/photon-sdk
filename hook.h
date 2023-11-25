@@ -12,7 +12,7 @@ public:
 };
 
 #define hk_virtual( vtable, name, off ) \
-	wh->hook->create_hook( reinterpret_cast<void *>( utils::memory::get_virtual( vtable, off ) ), reinterpret_cast<void *>( name##_hk_fn ), name##_hk, reinterpret_cast<void **>( &name ) );
+	wh->hook->create_hook( reinterpret_cast<void *>( utils::memory::get_virtual<off>( vtable ) ), reinterpret_cast<void *>( name##_hk_fn ), name##_hk, reinterpret_cast<void **>( &name ) );
 
 #define hk_inline( name, addr ) \
 	wh->hook->create_hook( reinterpret_cast<void *>( addr ), reinterpret_cast<void *>( name##_hk_fn ), name##_hk, reinterpret_cast<void **>( &name ) );

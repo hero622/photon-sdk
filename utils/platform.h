@@ -19,10 +19,7 @@
 #	define hk_fn( t, name, ... ) \
 		t __fastcall name##_hk_fn( void *ecx, int edx, __VA_ARGS__ )
 
-#	define plat_module( name, win, linux ) inline const char *name = win
-#	define offset( name, win, linux ) inline int name = win
-#	define signature( name, win, linux ) inline const char *name = win
-#	define symbol( name, win, linux ) inline const char *name = win
+#	define os( win, linux ) win
 #else
 #	define module( name ) name ".so"
 
@@ -42,8 +39,5 @@
 #	define hk_fn( t, name, ... ) \
 		t __rescall name##_hk_fn( void *ecx, ##__VA_ARGS__ )
 
-#	define plat_module( name, win, linux ) inline const char *name = linux
-#	define offset( name, win, linux ) inline int name = linux
-#	define signature( name, win, linux ) inline const char *name = linux
-#	define symbol( name, win, linux ) inline const char *name = linux
+#	define os( win, linux ) linux
 #endif

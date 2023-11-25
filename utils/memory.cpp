@@ -37,7 +37,7 @@ bool utils::memory::get_module_info( const char *module_name, module_info_t *mod
 
 					std::snprintf( mod_info.name, sizeof( mod_info.name ), "%s", name.c_str( ) );
 					std::snprintf( mod_info.path, sizeof( mod_info.path ), "%s", sz_mod_name );
-					mod_info.addr = ( std::uintptr_t ) info.lpBaseOfDll;
+					mod_info.addr = ( std::uint8_t * ) info.lpBaseOfDll;
 					mod_info.size = ( std::size_t ) info.SizeOfImage;
 
 					g_module_info.push_back( mod_info );

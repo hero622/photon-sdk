@@ -3,6 +3,7 @@
 #include "interfaces/console.h"
 #include "interfaces/cvar.h"
 #include "interfaces/engine_client.h"
+#include "interfaces/font_manager.h"
 #include "interfaces/input_system.h"
 #include "interfaces/mem_alloc.h"
 #include "interfaces/scheme.h"
@@ -51,4 +52,5 @@ public:
 	i_scheme *scheme;
 	i_input_stack_system *input_stack_system;
 	void *vgui_input;
+	c_font_manager *font_manager;
 };

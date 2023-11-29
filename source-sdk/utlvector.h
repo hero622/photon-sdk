@@ -149,12 +149,30 @@ namespace sdk {
 			return memory[ i ];
 		}
 
+		const t &element( int i ) const {
+			return memory[ i ];
+		}
+
 		t *base( ) {
 			return memory.base( );
 		}
 
 		int count( ) const {
 			return size;
+		}
+
+		int find( const t &src ) const {
+			for ( int i = 0; i < count( ); ++i ) {
+				if ( element( i ) == src )
+					return i;
+			}
+			return -1;
+		}
+
+		void remove( int elem ) {
+			destruct( &element( elem ) );
+			shift_elements_left( elem );
+			--size;
 		}
 
 		void remove_all( ) {
@@ -179,6 +197,14 @@ namespace sdk {
 			grow_vector( );
 			construct( &element( elem ) );
 			return elem;
+		}
+
+		void shift_elements_left( int elem, int num = 1 ) {
+			assert( is_valid_index( elem ) || ( size == 0 ) || ( num == 0 ) );
+			int num_to_move = size - elem - num;
+			if ( ( num_to_move > 0 ) && ( num > 0 ) ) {
+				memmove( &element( elem ), &element( elem + num ), num_to_move * sizeof( t ) );
+			}
 		}
 
 		inline int add_to_head( ) {

@@ -7,7 +7,7 @@ namespace sdk {
 	public:
 		int arg_c( ) const { return argc; };
 		const char *operator[]( int index ) const { return arg( index ); };
-		const char *arg( int index ) const { return this->argv[ index ]; };
+		const char *arg( int index ) const { return argv[ index ]; };
 
 		enum {
 			command_max_argc = 64,

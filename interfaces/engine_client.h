@@ -23,7 +23,7 @@ public:
 
 public:
 	void cbuf_add( const char *text, int delay ) {
-		auto target = this->get_active_split_screen_slot( );
-		this->cbuf_add_text( target, text, delay );
+		auto target = get_active_split_screen_slot( );
+		cbuf_add_text( target, text, delay );
 	}
 };

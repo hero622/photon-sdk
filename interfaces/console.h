@@ -13,10 +13,10 @@ public:
 
 public:
 	c_console( void *ptr ) {
-		this->msg = utils::memory::get_sym_addr<decltype( msg )>( ptr, os( "Msg", "Msg" ) );
-		this->color_msg = utils::memory::get_sym_addr<decltype( color_msg )>( ptr, os( "?ConColorMsg@@YAXABVColor@@PBDZZ", "_Z11ConColorMsgRK5ColorPKcz" ) );
-		this->warning = utils::memory::get_sym_addr<decltype( warning )>( ptr, os( "Warning", "Warning" ) );
-		this->dev_msg = utils::memory::get_sym_addr<decltype( dev_msg )>( ptr, os( "?DevMsg@@YAXPBDZZ", "_Z6DevMsgPKcz" ) );
-		this->dev_warning = utils::memory::get_sym_addr<decltype( dev_warning )>( ptr, os( "?DevWarning@@YAXPBDZZ", "_Z10DevWarningPKcz" ) );
+		msg = utils::memory::get_sym_addr<decltype( msg )>( ptr, os( "Msg", "Msg" ) );
+		color_msg = utils::memory::get_sym_addr<decltype( color_msg )>( ptr, os( "?ConColorMsg@@YAXABVColor@@PBDZZ", "_Z11ConColorMsgRK5ColorPKcz" ) );
+		warning = utils::memory::get_sym_addr<decltype( warning )>( ptr, os( "Warning", "Warning" ) );
+		dev_msg = utils::memory::get_sym_addr<decltype( dev_msg )>( ptr, os( "?DevMsg@@YAXPBDZZ", "_Z6DevMsgPKcz" ) );
+		dev_warning = utils::memory::get_sym_addr<decltype( dev_warning )>( ptr, os( "?DevWarning@@YAXPBDZZ", "_Z10DevWarningPKcz" ) );
 	}
 };

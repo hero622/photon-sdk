@@ -5,7 +5,7 @@
 
 #include <vector>
 
-namespace wh_api {
+namespace photon_api {
 	enum hud_type {
 		hudtype_hud,
 		hudtype_thud,
@@ -33,16 +33,16 @@ namespace wh_api {
 		virtual const char *get_text( ) = 0;  // Return C string value.
 		virtual const char *get_name( ) = 0;  // Return C string name.
 	};
-}  // namespace wh_api
+}  // namespace photon_api
 
 class c_hud {
 public:
-	virtual void reg( wh_api::i_hud *hud );      // Register a HUD component by pointer.
-	virtual void reg( wh_api::i_thud *thud );    // Register a THUD component by pointer.
-	virtual void unreg( wh_api::i_hud *hud );    // Unregister a HUD component by pointer.
-	virtual void unreg( wh_api::i_thud *thud );  // Unregister a THUD component by pointer.
+	virtual void reg( photon_api::i_hud *hud );      // Register a HUD component by pointer.
+	virtual void reg( photon_api::i_thud *thud );    // Register a THUD component by pointer.
+	virtual void unreg( photon_api::i_hud *hud );    // Unregister a HUD component by pointer.
+	virtual void unreg( photon_api::i_thud *thud );  // Unregister a THUD component by pointer.
 
-	virtual void draw_begin( wh_api::i_hud *hud );
+	virtual void draw_begin( photon_api::i_hud *hud );
 	virtual void draw_end( );
 	virtual void draw_filled_rect( int x, int y, int w, int h, sdk::color_t color );
 	virtual void draw_outlined_rect( int x, int y, int w, int h, sdk::color_t color );

@@ -6,7 +6,13 @@
 #include <vector>
 
 namespace wh_api {
+	enum hud_type {
+		hudtype_hud,
+		hudtype_thud,
+	};
+
 	struct hud_t {
+		hud_type type;       // Determines if the hud is a THUD or not.
 		sdk::vec2_t pos;     // Values between (0, 1).
 		sdk::vec2_t anchor;  // Values between (0, 1).
 		float scale;         // Scale value to multiply by. (CURRENTLY USELESS)

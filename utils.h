@@ -12,3 +12,5 @@ namespace utils {}
 		delete ptr;             \
 		ptr = nullptr;          \
 	}
+
+#define array_len( array ) ( sizeof( array ) / sizeof( *( array ) ) )

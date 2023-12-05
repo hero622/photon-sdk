@@ -1,6 +1,7 @@
 #pragma once
 
-#include "utils.h"
+#include "../utils.h"
+#include "color.h"
 #include "utlvector.h"
 
 namespace sdk {

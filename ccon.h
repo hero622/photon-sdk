@@ -7,18 +7,15 @@
 #include <unordered_map>
 
 class c_con {
-private:
-	std::unordered_map<const char *, sdk::con_var *> convars;
-	std::unordered_map<const char *, sdk::con_command *> concmds;
-
 public:
-	// expand this later by adding overloads etc
+	virtual sdk::con_var *create_convar( const char *name, const char *default_value, int flags = 0 );                                                                                                            // Create ConVars.
+	virtual sdk::con_var *create_convar( const char *name, const char *default_value, int flags, const char *help_string, sdk::fn_change_callback_t cbk = 0 );                                                    // Create ConVars.
+	virtual sdk::con_var *create_convar( const char *name, const char *default_value, int flags, const char *help_string, bool has_min, float min, bool has_max, float max, sdk::fn_change_callback_t cbk = 0 );  // Create ConVars.
+	virtual void destruct_convar( const char *name );                                                                                                                                                             // Destruct ConVars.
 
-	virtual sdk::con_var *create_convar( const char *name, const char *default_value, int flags, const char *help_string, bool has_min, float min, bool has_max, float max, sdk::fn_change_callback_t cbk );  // Create ConVars.
-	virtual void destruct_convar( const char *name );                                                                                                                                                         // Destruct ConVars.
-
-	virtual sdk::con_command *create_concmd( const char *name, sdk::fn_command_callback_t cbk, const char *help_string, int flags = 0 );  // Create ConCommands.
-	virtual void destruct_concmd( const char *name );                                                                                     // Destruct ConCommands.
+	// TODO: add completion func
+	virtual sdk::con_command *create_concmd( const char *name, sdk::fn_command_callback_t cbk, const char *help_string = 0, int flags = 0 );  // Create ConCommands.
+	virtual void destruct_concmd( const char *name );                                                                                         // Destruct ConCommands.
 
 	virtual void hook_cmd( const char *name, sdk::fn_command_callback_t detour, sdk::fn_command_callback_t &original );  // Replace ConCommand callback to your own.
 	virtual void unhook_cmd( const char *name, sdk::fn_command_callback_t original );                                    // Revert ConCommand callback.

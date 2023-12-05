@@ -25,7 +25,7 @@ ret *get_interface( const std::string &module_name, const std::string &interface
 		if ( !result )
 			return nullptr;
 
-		utils::console::log( "found interface %s in %s at %p.\n", interface_name.c_str( ), module_name.c_str( ), result );
+		utils::console::log( "[ photon ] found interface %s in %s at %p.\n", interface_name.c_str( ), module_name.c_str( ), result );
 
 		return static_cast<ret *>( result );
 	}

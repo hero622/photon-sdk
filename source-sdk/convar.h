@@ -1,5 +1,6 @@
 #pragma once
 
+#include "utils.h"
 #include "utlvector.h"
 
 namespace sdk {
@@ -23,16 +24,25 @@ namespace sdk {
 	typedef void ( *fn_command_callback_t )( const c_command &command );
 	typedef int ( *fn_command_completion_callback_t )( const char *partial, char commands[ 64 ][ 64 ] );
 
-	struct con_command_base {
+	class con_command_base {
+	public:
 		void *vtable;
 		con_command_base *next;
 		bool registered;
 		const char *name;
 		const char *help_string;
 		int flags;
+
+		void add_flag( int flag ) {
+			flags |= flag;
+		}
+		void remove_flag( int flag ) {
+			flags &= ~flag;
+		}
 	};
 
-	struct con_command : con_command_base {
+	class con_command : public con_command_base {
+	public:
 		union {
 			void *fn_command_callback_v1;
 			fn_command_callback_t fn_command_callback;
@@ -52,13 +62,17 @@ namespace sdk {
 		virtual void set_value( const char *value ) = 0;
 		virtual void set_value( float value ) = 0;
 		virtual void set_value( int value ) = 0;
+		virtual void set_value( color_t value ) = 0;
 		virtual const char *get_name( void ) const = 0;
+		virtual const char *get_base_name( void ) const = 0;
 		virtual bool is_flag_set( int flag ) const = 0;
+		virtual int get_split_screen_player_slot( ) const = 0;
 	};
 
 	typedef void ( *fn_change_callback_t )( i_con_var *var, const char *p_old_value, float fl_old_value );
 
-	struct con_var : con_command_base {
+	class con_var : public con_command_base {
+	public:
 		void *vtable_convar;
 		con_var *parent;
 		const char *default_value;
@@ -70,6 +84,33 @@ namespace sdk {
 		float min_val;
 		bool has_max;
 		float max_val;
-		fn_change_callback_t fn_change_callback;
+		utl_vector<fn_change_callback_t> fn_change_callback;
+
+		float get_float( ) const {
+			return f_value;
+		}
+		float get_int( ) const {
+			return n_value;
+		}
+		__forceinline color_t get_color( ) const {
+			uint8_t *color = ( uint8_t * ) &n_value;
+			return color_t( color[ 0 ], color[ 1 ], color[ 2 ], color[ 3 ] );
+		}
+		__forceinline bool get_bool( ) const {
+			return !!get_int( );
+		}
+		__forceinline const char *get_string( ) const {
+			return string;
+		}
+
+		void set_value( const char *value ) {
+			utils::memory::call_virtual<os( 12, 19 ), void>( this, value );
+		}
+		void set_value( float value ) {
+			utils::memory::call_virtual<os( 13, 20 ), void>( this, value );
+		}
+		void set_value( int value ) {
+			utils::memory::call_virtual<os( 14, 21 ), void>( this, value );
+		}
 	};
 }  // namespace sdk

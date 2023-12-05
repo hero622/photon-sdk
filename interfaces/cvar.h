@@ -13,4 +13,9 @@ public:
 	sdk::con_command_base *find_command_base( const char *name ) {
 		return utils::memory::call_virtual<13, sdk::con_command_base *>( this, name );
 	}
+
+public:
+	sdk::con_var *find_con_var( const char *name ) {
+		return reinterpret_cast<sdk::con_var *>( find_command_base( name ) );
+	}
 };

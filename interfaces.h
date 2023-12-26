@@ -8,32 +8,11 @@
 #include "interfaces/mem_alloc.h"
 #include "interfaces/scheme.h"
 #include "interfaces/surface.h"
-#include "utils.h"
-
-#include <string>
-
-template <typename ret>
-ret *get_interface( const std::string &module_name, const std::string &interface_name ) {
-	using create_interface_fn = void *( * ) ( const char *, int * );
-	const auto fn = utils::memory::get_sym_addr<create_interface_fn>( utils::memory::get_module_handle( module_name.c_str( ) ), "CreateInterface" );
-
-	if ( fn ) {
-		void *result = nullptr;
-
-		result = fn( interface_name.c_str( ), nullptr );
-
-		if ( !result )
-			return nullptr;
-
-		utils::console::log( "[ photon ] found interface %s in %s at %p.\n", interface_name.c_str( ), module_name.c_str( ), result );
-
-		return static_cast<ret *>( result );
-	}
-
-	return nullptr;
-}
 
 class c_portal2 {
+public:
+	virtual void *get_interface( const char *module_name, const char *interface_name );
+
 public:
 	c_console *console;
 	i_cvar *cvar;

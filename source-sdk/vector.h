@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cmath>
+
 namespace sdk {
 	class vec2_t {
 	public:
@@ -11,10 +13,10 @@ namespace sdk {
 			this->y = y;
 		}
 
-		float &operator[]( const size_t i ) {
+		inline float &operator[]( int i ) {
 			return ( ( float * ) this )[ i ];
 		}
-		float operator[]( const size_t i ) const {
+		inline float operator[]( int i ) const {
 			return ( ( float * ) this )[ i ];
 		}
 		inline vec2_t operator+( const vec2_t &v ) const {
@@ -70,7 +72,7 @@ namespace sdk {
 			return ( x * x ) + ( y * y );
 		}
 		inline float length( ) const {
-			return sqrt( length_sqr( ) );
+			return std::sqrt( length_sqr( ) );
 		}
 	};
 
@@ -85,10 +87,10 @@ namespace sdk {
 			this->z = z;
 		}
 
-		float &operator[]( const size_t i ) {
+		inline float &operator[]( int i ) {
 			return ( ( float * ) this )[ i ];
 		}
-		float operator[]( const size_t i ) const {
+		inline float operator[]( int i ) const {
 			return ( ( float * ) this )[ i ];
 		}
 		inline vec3_t operator+( const vec3_t &v ) const {
@@ -150,13 +152,13 @@ namespace sdk {
 			return ( x * x ) + ( y * y ) + ( z * z );
 		}
 		inline float length( ) const {
-			return sqrt( length_sqr( ) );
+			return std::sqrt( length_sqr( ) );
 		}
 		inline float length_2d_sqr( ) const {
 			return ( x * x ) + ( y * y );
 		}
 		inline float length_2d( ) const {
-			return sqrt( length_2d_sqr( ) );
+			return std::sqrt( length_2d_sqr( ) );
 		}
 
 		inline void normalize( ) {

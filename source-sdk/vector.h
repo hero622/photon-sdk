@@ -11,6 +11,12 @@ namespace sdk {
 			this->y = y;
 		}
 
+		float &operator[]( const size_t i ) {
+			return ( ( float * ) this )[ i ];
+		}
+		float operator[]( const size_t i ) const {
+			return ( ( float * ) this )[ i ];
+		}
 		inline vec2_t operator+( const vec2_t &v ) const {
 			return vec2_t( x + v.x, y + v.y );
 		}
@@ -29,29 +35,42 @@ namespace sdk {
 		inline vec2_t operator/( const float &fl ) const {
 			return vec2_t( x / fl, y / fl );
 		}
-		inline void operator+=( const vec2_t &v ) {
+		inline vec2_t &operator+=( const vec2_t &v ) {
 			x += v.x;
 			y += v.y;
+			return *this;
 		}
-		inline void operator-=( const vec2_t &v ) {
+		inline vec2_t &operator-=( const vec2_t &v ) {
 			x -= v.x;
 			y -= v.y;
+			return *this;
 		}
-		inline void operator*=( const vec2_t &v ) {
+		inline vec2_t &operator*=( const vec2_t &v ) {
 			x *= v.x;
 			y *= v.y;
+			return *this;
 		}
-		inline void operator/=( const vec2_t &v ) {
+		inline vec2_t &operator/=( const vec2_t &v ) {
 			x /= v.x;
 			y /= v.y;
+			return *this;
 		}
-		inline void operator*=( const float &fl ) {
+		inline vec2_t &operator*=( const float &fl ) {
 			x *= fl;
 			y *= fl;
+			return *this;
 		}
-		inline void operator/=( const float &fl ) {
+		inline vec2_t &operator/=( const float &fl ) {
 			x /= fl;
 			y /= fl;
+			return *this;
+		}
+
+		inline float length_sqr( ) const {
+			return ( x * x ) + ( y * y );
+		}
+		inline float length( ) const {
+			return sqrt( length_sqr( ) );
 		}
 	};
 
@@ -64,6 +83,97 @@ namespace sdk {
 			this->x = x;
 			this->y = y;
 			this->z = z;
+		}
+
+		float &operator[]( const size_t i ) {
+			return ( ( float * ) this )[ i ];
+		}
+		float operator[]( const size_t i ) const {
+			return ( ( float * ) this )[ i ];
+		}
+		inline vec3_t operator+( const vec3_t &v ) const {
+			return vec3_t( x + v.x, y + v.y, z + v.z );
+		}
+		inline vec3_t operator-( const vec3_t &v ) const {
+			return vec3_t( x - v.x, y - v.y, z - v.z );
+		}
+		inline vec3_t operator*( const vec3_t &v ) const {
+			return vec3_t( x * v.x, y * v.y, z * v.z );
+		}
+		inline vec3_t operator/( const vec3_t &v ) const {
+			return vec3_t( x / v.x, y / v.y, z / v.z );
+		}
+		inline vec3_t operator*( const float &fl ) const {
+			return vec3_t( x * fl, y * fl, z * fl );
+		}
+		inline vec3_t operator/( const float &fl ) const {
+			return vec3_t( x / fl, y / fl, z / fl );
+		}
+		inline vec3_t &operator+=( const vec3_t &v ) {
+			x += v.x;
+			y += v.y;
+			z += v.z;
+			return *this;
+		}
+		inline vec3_t &operator-=( const vec3_t &v ) {
+			x -= v.x;
+			y -= v.y;
+			z -= v.z;
+			return *this;
+		}
+		inline vec3_t &operator*=( const vec3_t &v ) {
+			x *= v.x;
+			y *= v.y;
+			z *= v.z;
+			return *this;
+		}
+		inline vec3_t &operator/=( const vec3_t &v ) {
+			x /= v.x;
+			y /= v.y;
+			z /= v.z;
+			return *this;
+		}
+		inline vec3_t &operator*=( const float &fl ) {
+			x *= fl;
+			y *= fl;
+			z *= fl;
+			return *this;
+		}
+		inline vec3_t &operator/=( const float &fl ) {
+			x /= fl;
+			y /= fl;
+			z /= fl;
+			return *this;
+		}
+
+		inline float length_sqr( ) const {
+			return ( x * x ) + ( y * y ) + ( z * z );
+		}
+		inline float length( ) const {
+			return sqrt( length_sqr( ) );
+		}
+		inline float length_2d_sqr( ) const {
+			return ( x * x ) + ( y * y );
+		}
+		inline float length_2d( ) const {
+			return sqrt( length_2d_sqr( ) );
+		}
+
+		inline void normalize( ) {
+			*this /= length( );
+		}
+		inline vec3_t normalized( ) const {
+			return *this / length( );
+		}
+
+		inline float dot( const vec3_t &v ) const {
+			return ( x * v.x ) + ( y * v.y ) + ( z * v.z );
+		}
+		inline vec3_t cross( const vec3_t &v ) const {
+			return vec3_t(
+				( y * v.z ) - ( z * v.y ),
+				( z * v.x ) - ( x * v.z ),
+				( x * v.y ) - ( y * v.x ) );
 		}
 	};
 }  // namespace sdk
